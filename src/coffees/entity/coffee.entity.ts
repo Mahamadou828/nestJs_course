@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Index,
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -12,8 +13,9 @@ export class Coffee {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Index()
   @Column()
-  name: string;
+  title: string;
 
   @Column()
   brand: string;
@@ -21,4 +23,7 @@ export class Coffee {
   @JoinTable()
   @ManyToMany((type) => Flavor, (flavor) => flavor.coffees, { cascade: true })
   flavors: Flavor[];
+
+  @Column({ default: 0 })
+  recommendations: number;
 }
